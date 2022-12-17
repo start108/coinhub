@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class CoinhubApplication {
 
-	// Git 정상작동 테스트
+	// Git 정상작동 테스트1
 	public static void main(String[] args) {
 		SpringApplication.run(CoinhubApplication.class, args);
 	}
