@@ -7,8 +7,6 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableFeignClients
 @SpringBootApplication
 public class CoinhubApplication {
-
-	// Git 정상작동 테스트1
 	public static void main(String[] args) {
 		SpringApplication.run(CoinhubApplication.class, args);
 	}
