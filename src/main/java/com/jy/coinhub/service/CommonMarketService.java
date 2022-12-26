@@ -16,12 +16,12 @@ public class CommonMarketService {
 
     public double getPrice(String market, String coin) {
 
-        MarketService marketService = getCommonCoins(marketServices, market);
+        MarketService marketService = getMarketService(marketServices, market);
 
         return marketService.getCoinCurrentPrice(coin);
     }
 
-    public static MarketService getCommonCoins(Map<String, MarketService> marketServices, String market) {
+    public static MarketService getMarketService(Map<String, MarketService> marketServices, String market) {
 
         for (String key : marketServices.keySet()) {
             if (key.substring(0, market.length()).equals(market.toLowerCase())) {
@@ -32,22 +32,22 @@ public class CommonMarketService {
         return null;
     }
 
-//    public List<String> getCommonCoin(String fromMarket, String toMarket) {
-//
-//        MarketService fromMarketService = getMarketService(marketServices, fromMarket);
-//        MarketService toMarketService = getMarketService(marketServices, toMarket);
-//
-//        List<String> fromMarketCoins = fromMarketService.getCoins();
-//        List<String> toMarketCoins = toMarketService.getCoins();
-//
-//        List<String> resultList = new ArrayList<>();
-//
-//        for(String coin : fromMarketCoins) {
-//            if(toMarketCoins.contains(coin)) {
-//                resultList.add(coin);
-//            }
-//        }
-//
-//        return null;
-//    }
+    public List<String> getCommonCoin(String fromMarket, String toMarket) {
+
+        MarketService fromMarketService = getMarketService(marketServices, fromMarket);
+        MarketService toMarketService = getMarketService(marketServices, toMarket);
+
+        List<String> fromMarketCoins = fromMarketService.getCoins();
+        List<String> toMarketCoins = toMarketService.getCoins();
+
+        List<String> resultList = new ArrayList<>();
+
+        for(String coin : fromMarketCoins) {
+            if(toMarketCoins.contains(coin)) {
+                resultList.add(coin);
+            }
+        }
+
+        return resultList;
+    }
 }

@@ -17,7 +17,7 @@ public class TransferCalculateContorller {
     private final TransferCalculateService transferCalculateService;
     @GetMapping("/transfer-calculate")
     public TransFerCalculateResponseView getPrice(@RequestParam String fromMarket, @RequestParam String toMarket, @RequestParam double amount) {
-        return null;
+        return new TransFerCalculateResponseView("BTC", 123.45, Map.of(123D, 123D), Map.of(123D, 123D));
 //        return TransFerCalculateResponseView.of(transferCalculateService.calculate(fromMarket, toMarket, amount));
     }
 }

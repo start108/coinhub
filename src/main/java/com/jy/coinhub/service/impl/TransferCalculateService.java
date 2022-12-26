@@ -20,8 +20,10 @@ public class TransferCalculateService {
 
     private final Map<String, MarketService> marketServices;
 
-//    public TransferCalculateDTO calculate(String fromMarket, String toMarket, double amount) {
-//
+    public TransferCalculateDTO calculate(String fromMarket, String toMarket, double amount) {
+
+        return null;
+
 //        // 두개의 마켓의 공통 코인 추출
 //        List<String> commonCoins = commonMarketService.getCommonCoin(fromMarket, toMarket);
 //
@@ -47,5 +49,5 @@ public class TransferCalculateService {
 //                fromMarketBuyDto.getOrderBooks().get(transferCoin),
 //                toMarketSellDto.getOrderBooks().get(transferCoin)
 //        );
-//    }
+    }
 }
