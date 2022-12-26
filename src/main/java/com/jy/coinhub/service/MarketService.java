@@ -1,6 +1,9 @@
 package com.jy.coinhub.service;
 
-public interface MarketService {
+import java.util.List;
 
+public interface MarketService {
     double getCoinCurrentPrice(String coin);
+
+    List<String> getCoins();
 }

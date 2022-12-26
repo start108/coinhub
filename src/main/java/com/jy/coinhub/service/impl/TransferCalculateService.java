@@ -29,7 +29,7 @@ public class TransferCalculateService {
 //
 //        MarketService toMarketService = CommonMarketService.getCommonCoins(marketServices, toMarket);
 //
-//        // 얼마에 살 수 있고 얼마에 팔 수 있는지
+//        // 얼마에 살 수 있고(fromMarket)
 //        CoinBuyDTO fromMarketBuyDto = fromMarketService.calculateBuy(commonCoins, amount);
 //
 //        // 수수료 계산 (fromMarket)
