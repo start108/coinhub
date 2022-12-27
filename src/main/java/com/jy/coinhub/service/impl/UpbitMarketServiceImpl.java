@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -23,6 +24,15 @@ public class UpbitMarketServiceImpl implements MarketService {
     }
 
     public List<String> getCoins() {
-        return List.of("A", "B", "D");
+
+        List<String> resultList = new ArrayList<>();
+
+        upbitFeignClient.getMarketCode().forEach(x -> {
+            if(x.getMarket().startsWith("KRW")) {
+                resultList.add(x.getMarket().substring(4).toUpperCase());
+            }
+        });
+
+        return resultList;
     }
 }
