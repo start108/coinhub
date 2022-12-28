@@ -65,6 +65,5 @@ class CommonMarketServiceTest {
         assertEquals(upbitMarketService, CommonMarketService.getMarketService(marketServices, "Upbit"));
         assertEquals(upbitMarketService, CommonMarketService.getMarketService(marketServices, "UPBIT"));
         assertEquals(upbitMarketService, CommonMarketService.getMarketService(marketServices, "upbIT"));
-
     }
 }
