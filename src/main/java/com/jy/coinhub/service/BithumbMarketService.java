@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -40,6 +41,9 @@ public class BithumbMarketService implements MarketService {
 
     public CoinBuyDTO calculateBuy(List<String> commonCoins, double amount) {
 
+        Map<String, Double> amounts = new HashMap<>();
+        Map<String, Map<Double, Double>> orderBooks = new HashMap<>();
+
         Map<String, Object> bithumbResponse = bithumbFeignClient.getOrderBook().getData();
 
         bithumbResponse.forEach((key, value) -> {
@@ -50,6 +54,7 @@ public class BithumbMarketService implements MarketService {
                 double availableCoin = 0;
 
                 String coin = key;
+                Map<Double, Double> eachOrderBook = new HashMap<>();
                 List<Map<String, String>> wannaSell = (List<Map<String, String>>)((Map<String, Object>) value).get("asks");
 
                 for(int i = 0; i < wannaSell.size(); i++) {
@@ -59,14 +64,29 @@ public class BithumbMarketService implements MarketService {
                     Double eachTotalPrice = price * quantity;
                     Double purchaseableCoinAmount = availableCurrency / price;
 
-//                    if( ) {
-//
-//                    }
+                    if(availableCurrency <= eachTotalPrice) {
+
+                        availableCoin += purchaseableCoinAmount;
+                        eachOrderBook.put(price, purchaseableCoinAmount);
+                        availableCurrency = 0;
+
+                        break;
+                    } else {
+
+                        availableCoin += quantity;
+                        eachOrderBook.put(price, quantity);
+                        availableCurrency -= eachTotalPrice;
+                    }
+                }
+
+                if(availableCurrency == 0) {
+                    amounts.put(coin, availableCoin);
+                    orderBooks.put(coin, eachOrderBook);
                 }
             }
         });
 
-        return null;
+        return new CoinBuyDTO(amounts, orderBooks);
     }
 
     public CoinSellDTO calculateSell(CoinBuyDTO coinBuyDTO) {
