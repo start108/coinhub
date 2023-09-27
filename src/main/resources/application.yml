@@ -1,2 +1,5 @@
 server:
   port: 8081
+
+feeUrl:
+  bithumb: https://www.bithumb.com/customer_support/info_fee

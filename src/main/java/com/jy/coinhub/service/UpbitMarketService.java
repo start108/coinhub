@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -43,6 +44,11 @@ public class UpbitMarketService implements MarketService {
 
     @Override
     public CoinSellDTO calculateSell(CoinBuyDTO coinBuyDTO) {
+        return null;
+    }
+
+    @Override
+    public Map<String, Double> calculateFee() throws Exception {
         return null;
     }
 }

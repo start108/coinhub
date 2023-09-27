@@ -4,6 +4,11 @@ import com.jy.coinhub.dto.CoinBuyDTO;
 import com.jy.coinhub.dto.CoinSellDTO;
 import com.jy.coinhub.feign.BithumbFeignClient;
 import lombok.RequiredArgsConstructor;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,6 +21,9 @@ import java.util.Map;
 public class BithumbMarketService implements MarketService {
 
     private final BithumbFeignClient bithumbFeignClient;
+
+    @Value("${feeUrl.bithumb}")
+    private String feeUrl;
 
     private static final String korea = "_KRW";
 
@@ -91,5 +99,32 @@ public class BithumbMarketService implements MarketService {
 
     public CoinSellDTO calculateSell(CoinBuyDTO coinBuyDTO) {
         return null;
+    }
+
+    public Map<String /* Coin Name */, Double /* Withdrawal Fee */> calculateFee() throws Exception {
+
+        Map<String, Double> feeMap = new HashMap<>();
+
+        Document document = Jsoup.connect(feeUrl).timeout(10000).get();
+        Elements elements = document.select("table.g_tb_normal.fee_in_out tbody tr");
+
+        for(Element element : elements) {
+
+            String coinHTML = element.select("td.money_type.tx_c").html();
+
+            if(!coinHTML.contains("(")) continue;
+
+            String coinFeeHTML = element.select("div.right.out_fee").html();
+
+            if(coinFeeHTML.isEmpty()) continue;
+
+            if("-".equals(coinFeeHTML)) {
+                coinFeeHTML = "0";
+            }
+
+            feeMap.put(coinHTML, Double.parseDouble(coinFeeHTML));
+        }
+
+        return feeMap;
     }
 }
