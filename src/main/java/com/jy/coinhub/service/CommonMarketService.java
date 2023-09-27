@@ -1,7 +1,6 @@
 package com.jy.coinhub.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,17 +20,6 @@ public class CommonMarketService {
         return marketService.getCoinCurrentPrice(coin);
     }
 
-    public static MarketService getMarketService(Map<String, MarketService> marketServices, String market) {
-
-        for (String key : marketServices.keySet()) {
-            if (key.substring(0, market.length()).equals(market.toLowerCase())) {
-                return marketServices.get(key);
-            }
-        }
-
-        return null;
-    }
-
     public List<String> getCommonCoin(String fromMarket, String toMarket) {
 
         MarketService fromMarketService = getMarketService(marketServices, fromMarket);
@@ -42,12 +30,23 @@ public class CommonMarketService {
 
         List<String> resultList = new ArrayList<>();
 
-        for(String coin : fromMarketCoins) {
-            if(toMarketCoins.contains(coin)) {
+        for (String coin : fromMarketCoins) {
+            if (toMarketCoins.contains(coin)) {
                 resultList.add(coin);
             }
         }
 
         return resultList;
+    }
+
+    public static MarketService getMarketService(Map<String, MarketService> marketService, String market) {
+
+        for (String key : marketService.keySet()) {
+            if (key.substring(0, market.length()).equals(market.toLowerCase())) {
+                return marketService.get(key);
+            }
+        }
+
+        return null;
     }
 }

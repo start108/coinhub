@@ -1,7 +1,5 @@
 package com.jy.coinhub.service;
 
-import com.jy.coinhub.service.impl.BithumbMarketServiceImpl;
-import com.jy.coinhub.service.impl.UpbitMarketServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,10 +16,10 @@ import static org.mockito.Mockito.when;
 class CommonMarketServiceTest {
 
     @Mock
-    private BithumbMarketServiceImpl bithumbMarketService;
+    private BithumbMarketService bithumbMarketService;
 
     @Mock
-    private UpbitMarketServiceImpl upbitMarketService;
+    private UpbitMarketService upbitMarketService;
 
     private CommonMarketService commonMarketService;
 

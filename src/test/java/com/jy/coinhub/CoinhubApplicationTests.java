@@ -9,5 +9,4 @@ class CoinhubApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }

@@ -1,10 +1,8 @@
-package com.jy.coinhub.service.impl;
+package com.jy.coinhub.service;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class UpbitMarketServiceImplTest {
+class UpbitMarketServiceTest {
 
     // TODO  bithumbFeignClient Mock 처리
     @Test

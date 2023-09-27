@@ -15,6 +15,7 @@ public class TransFerCalculateResponseView {
     private Map<Double, Double> buyOrderBook;
     private Map<Double, Double> sellOrderBook;
 
+    // DTO -> View
     public static TransFerCalculateResponseView of(TransferCalculateDTO transferCalculateDTO) {
 
         return new TransFerCalculateResponseView(

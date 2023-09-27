@@ -1,9 +1,9 @@
-package com.jy.coinhub.service.impl;
+package com.jy.coinhub.service;
 
+import com.jy.coinhub.dto.CoinBuyDTO;
+import com.jy.coinhub.dto.CoinSellDTO;
 import com.jy.coinhub.feign.UpbitFeignClient;
-import com.jy.coinhub.service.MarketService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class UpbitMarketServiceImpl implements MarketService {
+public class UpbitMarketService implements MarketService {
 
     private final UpbitFeignClient upbitFeignClient;
 
@@ -34,5 +34,15 @@ public class UpbitMarketServiceImpl implements MarketService {
         });
 
         return resultList;
+    }
+
+    @Override
+    public CoinBuyDTO calculateBuy(List<String> commonCoins, double amount) {
+        return null;
+    }
+
+    @Override
+    public CoinSellDTO calculateSell(CoinBuyDTO coinBuyDTO) {
+        return null;
     }
 }
