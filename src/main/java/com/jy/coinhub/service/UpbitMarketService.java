@@ -2,19 +2,25 @@ package com.jy.coinhub.service;
 
 import com.jy.coinhub.dto.CoinBuyDTO;
 import com.jy.coinhub.dto.CoinSellDTO;
+import com.jy.coinhub.feign.UpbitFeeFeignClient;
 import com.jy.coinhub.feign.UpbitFeignClient;
+import com.jy.coinhub.model.UpbitEachWithdrawlFee;
+import com.jy.coinhub.model.UpbitWithdrawlFee;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class UpbitMarketService implements MarketService {
 
     private final UpbitFeignClient upbitFeignClient;
+
+    private final UpbitFeeFeignClient upbitFeeFeignClient;
 
     private static final String korea = "KRW-";
 
@@ -49,6 +55,11 @@ public class UpbitMarketService implements MarketService {
 
     @Override
     public Map<String, Double> calculateFee() throws Exception {
-        return null;
+        return upbitFeeFeignClient.getWithdrawlFee()
+                .getData()
+                .stream()
+                .collect(Collectors.toMap(
+                        UpbitEachWithdrawlFee::getCurrency, UpbitEachWithdrawlFee::getWithdrawFee
+        ));
     }
 }

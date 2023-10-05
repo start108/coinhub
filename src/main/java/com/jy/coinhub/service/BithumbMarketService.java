@@ -114,6 +114,8 @@ public class BithumbMarketService implements MarketService {
 
             if(!coinHTML.contains("(")) continue;
 
+            coinHTML = coinHTML.substring(coinHTML.indexOf("(") + 1, coinHTML.indexOf(")"));
+
             String coinFeeHTML = element.select("div.right.out_fee").html();
 
             if(coinFeeHTML.isEmpty()) continue;
