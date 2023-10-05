@@ -11,18 +11,26 @@ import java.util.Map;
 public class TransFerCalculateResponseView {
 
     private String coin;
-    private double amount;
+    private double buyAmount;
+    private double fee;
+    private double sellAmount;
     private Map<Double, Double> buyOrderBook;
     private Map<Double, Double> sellOrderBook;
+    private double profit;
+    private double profitRatio;
 
     // DTO -> View
-    public static TransFerCalculateResponseView of(TransferCalculateDTO transferCalculateDTO) {
+    public static TransFerCalculateResponseView of(TransferCalculateDTO transferCalculateDTO, double inputAmount) {
 
         return new TransFerCalculateResponseView(
                 transferCalculateDTO.getCoin(),
-                transferCalculateDTO.getAmount(),
+                transferCalculateDTO.getBuyAmount(),
+                transferCalculateDTO.getFee(),
+                transferCalculateDTO.getSellAmount(),
                 transferCalculateDTO.getBuyOrderBook(),
-                transferCalculateDTO.getSellOrderBook()
+                transferCalculateDTO.getSellOrderBook(),
+                transferCalculateDTO.getSellAmount() - inputAmount,
+                transferCalculateDTO.getSellAmount() / inputAmount
         );
     }
 }

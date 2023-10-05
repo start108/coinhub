@@ -5,7 +5,6 @@ import com.jy.coinhub.dto.CoinSellDTO;
 import com.jy.coinhub.feign.UpbitFeeFeignClient;
 import com.jy.coinhub.feign.UpbitFeignClient;
 import com.jy.coinhub.model.UpbitEachWithdrawlFee;
-import com.jy.coinhub.model.UpbitWithdrawlFee;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +34,7 @@ public class UpbitMarketService implements MarketService {
         List<String> resultList = new ArrayList<>();
 
         upbitFeignClient.getMarketCode().forEach(x -> {
-            if(x.getMarket().startsWith("KRW")) {
+            if (x.getMarket().startsWith("KRW")) {
                 resultList.add(x.getMarket().substring(4).toUpperCase());
             }
         });
@@ -49,7 +48,7 @@ public class UpbitMarketService implements MarketService {
     }
 
     @Override
-    public CoinSellDTO calculateSell(CoinBuyDTO coinBuyDTO) {
+    public CoinSellDTO calculateSell(Map<String, Double> amounts) {
         return null;
     }
 
@@ -60,6 +59,6 @@ public class UpbitMarketService implements MarketService {
                 .stream()
                 .collect(Collectors.toMap(
                         UpbitEachWithdrawlFee::getCurrency, UpbitEachWithdrawlFee::getWithdrawFee
-        ));
+                ));
     }
 }

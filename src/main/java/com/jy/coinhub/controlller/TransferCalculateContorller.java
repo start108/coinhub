@@ -7,16 +7,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Map;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 public class TransferCalculateContorller {
 
     private final TransferCalculateService transferCalculateService;
+
     @GetMapping("/transfer-calculate")
-    public TransFerCalculateResponseView getPrice(@RequestParam String fromMarket, @RequestParam String toMarket, @RequestParam double amount) {
-        return new TransFerCalculateResponseView("BTC", 123.45, Map.of(123D, 123D), Map.of(123D, 123D));
-//        return TransFerCalculateResponseView.of(transferCalculateService.calculate(fromMarket, toMarket, amount));
+    public List<TransFerCalculateResponseView> getPrice(@RequestParam String fromMarket, @RequestParam String toMarket, @RequestParam double amount) throws Exception {
+        return transferCalculateService.calculate(fromMarket, toMarket, amount)
+                .stream()
+                .map(key -> TransFerCalculateResponseView.of(key, amount))
+                .toList();
     }
 }

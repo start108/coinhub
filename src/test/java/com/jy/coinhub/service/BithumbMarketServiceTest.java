@@ -9,6 +9,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -71,40 +72,40 @@ class BithumbMarketServiceTest {
         result.setData(
                 Map.of(
                         "A", Map.of(
-                                "bids", List.of(
-                                        Map.of("price", "4", "quantity", "1"),
-                                        Map.of("price", "2", "quantity", "1"),
-                                        Map.of("price", "1", "quantity", "1")
-                                ),
-                                "asks", List.of(
+                                "bids", new ArrayList<>(List.of(
                                         Map.of("price", "1", "quantity", "1"),
                                         Map.of("price", "2", "quantity", "1"),
                                         Map.of("price", "4", "quantity", "1")
-                                )
+                                )),
+                                "asks", new ArrayList<>(List.of(
+                                        Map.of("price", "4", "quantity", "1"),
+                                        Map.of("price", "2", "quantity", "1"),
+                                        Map.of("price", "1", "quantity", "1")
+                                ))
                         ),
                         "B", Map.of(
-                                "bids", List.of(
-                                        Map.of("price", "4", "quantity", "2"),
-                                        Map.of("price", "2", "quantity", "2"),
-                                        Map.of("price", "1", "quantity", "2")
-                                ),
-                                "asks", List.of(
+                                "bids", new ArrayList<>(List.of(
                                         Map.of("price", "1", "quantity", "2"),
                                         Map.of("price", "2", "quantity", "2"),
                                         Map.of("price", "4", "quantity", "2")
-                                )
+                                )),
+                                "asks", new ArrayList<>(List.of(
+                                        Map.of("price", "4", "quantity", "2"),
+                                        Map.of("price", "2", "quantity", "2"),
+                                        Map.of("price", "1", "quantity", "2")
+                                ))
                         ),
                         "C", Map.of(
-                                "bids", List.of(
-                                        Map.of("price", "4", "quantity", "3"),
-                                        Map.of("price", "2", "quantity", "3"),
-                                        Map.of("price", "1", "quantity", "3")
-                                ),
-                                "asks", List.of(
+                                "bids", new ArrayList<>(List.of(
                                         Map.of("price", "1", "quantity", "3"),
                                         Map.of("price", "2", "quantity", "3"),
                                         Map.of("price", "4", "quantity", "3")
-                                )
+                                )),
+                                "asks", new ArrayList<>(List.of(
+                                        Map.of("price", "4", "quantity", "3"),
+                                        Map.of("price", "2", "quantity", "3"),
+                                        Map.of("price", "1", "quantity", "3")
+                                ))
                         )
                 )
         );

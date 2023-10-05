@@ -9,7 +9,9 @@ import java.util.Map;
 @AllArgsConstructor
 public class TransferCalculateDTO {
     private String coin;
-    private double amount;
+    private double buyAmount;
+    private double fee;
+    private double sellAmount;
     private Map<Double, Double> buyOrderBook;
     private Map<Double, Double> sellOrderBook;
 }

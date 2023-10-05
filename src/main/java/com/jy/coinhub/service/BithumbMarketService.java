@@ -11,10 +11,7 @@ import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -50,20 +47,23 @@ public class BithumbMarketService implements MarketService {
     public CoinBuyDTO calculateBuy(List<String> commonCoins, double amount) {
 
         Map<String, Double> amounts = new HashMap<>();
-        Map<String, Map<Double, Double>> orderBooks = new HashMap<>();
+        Map<String, SortedMap<Double, Double>> orderBooks = new HashMap<>();
 
         Map<String, Object> bithumbResponse = bithumbFeignClient.getOrderBook().getData();
 
         bithumbResponse.forEach((key, value) -> {
 
-            if(!("timestamp".equalsIgnoreCase(key) || "payment_currency".equalsIgnoreCase(key))) {
+            if(!("timestamp".equalsIgnoreCase(key) || "payment_currency".equalsIgnoreCase(key)) && commonCoins.contains(key)) {
 
                 double availableCurrency = amount;
                 double availableCoin = 0;
 
                 String coin = key;
-                Map<Double, Double> eachOrderBook = new HashMap<>();
+                SortedMap<Double, Double> eachOrderBook = new TreeMap<>();
                 List<Map<String, String>> wannaSell = (List<Map<String, String>>)((Map<String, Object>) value).get("asks");
+
+                // 오름차순
+                wannaSell.sort(Comparator.comparingDouble(k -> Double.parseDouble(k.get("price"))));
 
                 for(int i = 0; i < wannaSell.size(); i++) {
 
@@ -97,7 +97,7 @@ public class BithumbMarketService implements MarketService {
         return new CoinBuyDTO(amounts, orderBooks);
     }
 
-    public CoinSellDTO calculateSell(CoinBuyDTO coinBuyDTO) {
+    public CoinSellDTO calculateSell(Map<String, Double> amounts) {
         return null;
     }
 
