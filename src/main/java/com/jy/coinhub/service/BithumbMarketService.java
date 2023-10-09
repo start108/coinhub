@@ -1,5 +1,6 @@
 package com.jy.coinhub.service;
 
+import com.jy.coinhub.constant.CacheConstants;
 import com.jy.coinhub.dto.CoinBuyDTO;
 import com.jy.coinhub.dto.CoinSellDTO;
 import com.jy.coinhub.feign.BithumbFeignClient;
@@ -102,7 +103,7 @@ public class BithumbMarketService implements MarketService {
         return null;
     }
 
-    @Cacheable("BITHUMB_CALCULATE_FEE")
+    @Cacheable(CacheConstants.BITHUMB_WITHDRAWL_FEE)
     public Map<String /* Coin Name */, Double /* Withdrawal Fee */> calculateFee() throws Exception {
 
         Map<String, Double> feeMap = new HashMap<>();

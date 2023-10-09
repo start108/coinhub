@@ -1,5 +1,6 @@
 package com.jy.coinhub.feign;
 
+import com.jy.coinhub.constant.CacheConstants;
 import com.jy.coinhub.model.UpbitCoinPrice;
 import com.jy.coinhub.model.UpbitMarketCode;
 import org.springframework.cache.annotation.Cacheable;
@@ -12,11 +13,11 @@ import java.util.List;
 @FeignClient(name = "upbit", url = "https://api.upbit.com/v1")
 public interface UpbitFeignClient {
 
-    @Cacheable("UPBIT_COIN_PRICE")
+    @Cacheable(CacheConstants.UPBIT_COIN_PRICE)
     @GetMapping("/ticker")
     List<UpbitCoinPrice> getCoinPrice(@RequestParam("markets") String coin);
 
-    @Cacheable("UPBIT_MARKET_CODE")
+    @Cacheable(CacheConstants.UPBIT_MARKET_CODE)
     @GetMapping("/market/all")
     List<UpbitMarketCode> getMarketCode();
 }
