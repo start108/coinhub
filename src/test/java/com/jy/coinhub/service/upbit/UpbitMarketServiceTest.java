@@ -1,4 +1,4 @@
-package com.jy.coinhub.service;
+package com.jy.coinhub.service.upbit;
 
 import org.junit.jupiter.api.Test;
 

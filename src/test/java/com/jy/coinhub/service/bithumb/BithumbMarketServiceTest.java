@@ -1,8 +1,9 @@
-package com.jy.coinhub.service;
+package com.jy.coinhub.service.bithumb;
 
 import com.jy.coinhub.dto.CoinBuyDTO;
 import com.jy.coinhub.feign.BithumbFeignClient;
 import com.jy.coinhub.feign.response.BithumbResponse;
+import com.jy.coinhub.service.BithumbMarketService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
